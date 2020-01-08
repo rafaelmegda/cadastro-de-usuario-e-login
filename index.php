@@ -1,3 +1,8 @@
+ <?php
+ require_once 'classes/usuarios.php';
+ $u = new Usuario;
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +28,53 @@
     <a href="cadastrar.php"> Ainda não é inscrito?<strong>Cadastre-se</strong></a>
   </div>
 </form>
+<?php
+//isset = verifica a existencia de variavel, array
+if (isset($_POST['emailLogin']))
+{
+    //addslashes para evitar sql injection
+    $emailLogin = addslashes($_POST['emailLogin']);
+    $senhaLogin = addslashes($_POST['senhaLogin']);
 
+    //verificar se esta preenchido (Validação form)
+    if(!empty($emailLogin) && !empty($senhaLogin))
+    {
 
+      $u->conectar("sistemajbs", "localhost", "root", "");
+      if($u->msgErro == "")//se não teve erro, OK
+      {
 
+        if ($u->logar($emailLogin, $senhaLogin))
+        {
+          header("location: areaprivada.php");
+        }
+        else
+        { 
+          ?>
+          <div class="msg-erro">
+          Email e/ou senha estão incorretos!
+          </div>
+          <?php
+        }
+      }
+      else
+      {
+        ?>
+        <div class="msg-erro">
+        <?php echo "Erro: ".$u->msgErro; ?>
+        </div>
+        <?php
+      }
+    }
+    else
+    {
+      ?>
+      <div class="msg-erro">
+      Preencha todos os campos!
+      </div>
+      <?php
+    }
+  }
+?>
 </body>
 </html>
