@@ -1,0 +1,32 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-image: url("../jbspassagem/img/logoJBS.png");
+    background-position: 10% 10%;
+    background-size: 10%;
+    background-repeat: no-repeat;
+
+}
+
+.form-group, h1 {
+    width: 420px;
+    margin: 200px auto 0px auto;
+    padding: 20px;
+    border-radius: 30px;
+    color: black;
+    font-size: 14pt;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+}
+
+a:hover{
+    text-decoration: underline;
+}
